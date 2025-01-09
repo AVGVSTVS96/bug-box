@@ -1,21 +1,25 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-export default function HomeScreen() {
+export default function CaptureScreen() {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={[styles.header, { borderBottomColor: colors.text + '20' }]}>
-        <Text style={[styles.title, { color: colors.text }]}>My Notes</Text>
+        <Text style={[styles.title, { color: colors.text }]}>Capture Note</Text>
       </View>
       <View style={styles.content}>
-        <Text style={[styles.placeholder, { color: colors.icon }]}>No notes yet</Text>
-        <Text style={[styles.subtitle, { color: colors.tabIconDefault }]}>
-          Tap the Capture tab to create your first note
-        </Text>
+        <TouchableOpacity 
+          style={[styles.recordButton, { backgroundColor: colors.tint }]}
+          activeOpacity={0.7}
+        >
+          <IconSymbol size={40} name="mic.fill" color={colors.background} />
+        </TouchableOpacity>
+        <Text style={[styles.hint, { color: colors.icon }]}>Tap to start recording</Text>
       </View>
     </View>
   );
@@ -40,12 +44,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
   },
-  placeholder: {
-    fontSize: 18,
-    marginBottom: 8,
+  recordButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
   },
-  subtitle: {
-    fontSize: 14,
-    textAlign: 'center',
+  hint: {
+    fontSize: 16,
   },
-});
+}); 
